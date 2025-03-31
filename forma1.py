@@ -24,10 +24,12 @@ legtobbet_nyert = max(adatok, key=lambda x: x[2])
 
 legtobbet_versenyzet = max(adatok, key=lambda x: x[3])
 
-osszes_futamszam = sum(adatok, key=lambda x: x[3])
-print(osszes_futamszam)
+atlag_futamszam = 0
+for versenyzo in adatok:
+    atlag_futamszam += versenyzo[3]
 
-print(f"A beolvasott fájlban összesen {szam} versenyző szerepel.")
-print(f"A legtöbb futamot nyert versenyző: {legtobbet_nyert[0]}")
-print(f"A legtöbb futamot teljesített versenyző: {legtobbet_versenyzet[0]}")
-print("Az átlagos futamszám: ____")
+with open('./kiirt_adatok/statisztika.txt', 'w', encoding='utf-8') as celfajl:
+    print(f"A beolvasott fájlban összesen {szam} versenyző szerepel.", file=celfajl)
+    print(f"A legtöbb futamot nyert versenyző: {legtobbet_nyert[0]}", file=celfajl)
+    print(f"A legtöbb futamot teljesített versenyző: {legtobbet_versenyzet[0]}", file=celfajl)
+    print(f"Az átlagos futamszám: {atlag_futamszam / len(adatok)}", file=celfajl)
